@@ -12,4 +12,25 @@ const createIncCtrl = expressAsyncHandler(async (req, res) => {
   }
 });
 
-module.exports = {createIncCtrl};
+// fetch all income
+const fetchAllIncCtrl = expressAsyncHandler(async (req, res) => {
+  try {
+    const income = await Income.find();
+    res.json(income);
+  } catch (error) {
+    res.json(error);
+  }
+});
+
+// fetch single income
+const fetchIncDetailCtrl = expressAsyncHandler(async (req, res) => {
+  const {id} = req?.params;
+  try {
+    const income = await Income.findById(id);
+    res.json(income);
+  } catch (error) {
+    res.json(error);
+  }
+});
+
+module.exports = {createIncCtrl, fetchAllIncCtrl, fetchIncDetailCtrl};
