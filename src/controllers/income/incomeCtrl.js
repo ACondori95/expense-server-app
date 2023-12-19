@@ -33,4 +33,37 @@ const fetchIncDetailCtrl = expressAsyncHandler(async (req, res) => {
   }
 });
 
-module.exports = {createIncCtrl, fetchAllIncCtrl, fetchIncDetailCtrl};
+// update
+const updateIncCtrl = expressAsyncHandler(async (req, res) => {
+  const {id} = req?.params;
+  const {title, amount, description} = req.body;
+  try {
+    const income = await Income.findByIdAndUpdate(
+      id,
+      {title, description, amount},
+      {new: true}
+    );
+    res.json(income);
+  } catch (error) {
+    res.json(error);
+  }
+});
+
+// delete
+const deleteIncCtrl = expressAsyncHandler(async (req, res) => {
+  const {id} = req?.params;
+  try {
+    const income = await Income.findByIdAndDelete(id);
+    res.json(income);
+  } catch (error) {
+    res.json(error);
+  }
+});
+
+module.exports = {
+  createIncCtrl,
+  fetchAllIncCtrl,
+  fetchIncDetailCtrl,
+  updateIncCtrl,
+  deleteIncCtrl,
+};

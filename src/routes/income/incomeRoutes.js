@@ -3,6 +3,8 @@ const {
   createIncCtrl,
   fetchAllIncCtrl,
   fetchIncDetailCtrl,
+  updateIncCtrl,
+  deleteIncCtrl,
 } = require("../../controllers/income/incomeCtrl");
 
 const incomeRoute = express.Router();
@@ -10,5 +12,7 @@ const incomeRoute = express.Router();
 incomeRoute.post("/", createIncCtrl);
 incomeRoute.get("/", fetchAllIncCtrl);
 incomeRoute.get("/:id", fetchIncDetailCtrl);
+incomeRoute.put("/:id", updateIncCtrl);
+incomeRoute.delete("/:id", deleteIncCtrl);
 
 module.exports = incomeRoute;
